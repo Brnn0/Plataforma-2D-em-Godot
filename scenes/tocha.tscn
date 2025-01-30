@@ -1,0 +1,67 @@
+[gd_scene load_steps=12 format=3 uid="uid://c7f8jvfsg3nwj"]
+
+[ext_resource type="Texture2D" uid="uid://l4wow0oyw8qy" path="res://assets/Map/Itens/Objetos/Tocha/TochaBreak1.png" id="1_8gb0v"]
+[ext_resource type="Texture2D" uid="uid://cs4cvcpc8paxq" path="res://assets/Map/Itens/Objetos/Tocha/TochaBreak2.png" id="2_s7iyd"]
+[ext_resource type="Texture2D" uid="uid://c2bi8mk6pe6ya" path="res://assets/Map/Itens/Objetos/Tocha/TochaBreak3.png" id="3_sycok"]
+[ext_resource type="Texture2D" uid="uid://3el0tegtx0nl" path="res://assets/Map/Itens/Objetos/Tocha/TochaBreak4.png" id="4_iy747"]
+[ext_resource type="Texture2D" uid="uid://1t8vo0mr3q3u" path="res://assets/Map/Itens/Objetos/Tocha/TochaBreak5.png" id="5_eq8sm"]
+[ext_resource type="Texture2D" uid="uid://b2lxp0rmgr8tg" path="res://assets/Map/Itens/Objetos/Tocha/Tocha1.png" id="6_nvfbg"]
+[ext_resource type="Texture2D" uid="uid://dfg1ayl7xnj6m" path="res://assets/Map/Itens/Objetos/Tocha/Tocha2.png" id="7_ltd60"]
+[ext_resource type="Texture2D" uid="uid://d4eir1s2lbtow" path="res://assets/Map/Itens/Objetos/Tocha/Tocha3.png" id="8_qvv3k"]
+[ext_resource type="Texture2D" uid="uid://b7ur3fv0qwjo" path="res://assets/Map/Itens/Objetos/Tocha/Tocha4.png" id="9_8ueec"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ickvf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8gb0v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_s7iyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sycok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iy747")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_eq8sm")
+}],
+"loop": false,
+"name": &"break",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_nvfbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ltd60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qvv3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_8ueec")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ec86d"]
+size = Vector2(37, 66)
+
+[node name="Tocha" type="Node2D"]
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ickvf")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_ec86d")

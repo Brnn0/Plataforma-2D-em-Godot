@@ -1,0 +1,135 @@
+[gd_scene load_steps=22 format=3 uid="uid://bacxn1pt73rxw"]
+
+[ext_resource type="Script" path="res://script/esqueleto.gd" id="1_h5xn1"]
+[ext_resource type="Texture2D" uid="uid://cxq8cvvdglc0y" path="res://assets/Enemies/esqueleto/death1.png" id="1_h7pv6"]
+[ext_resource type="Texture2D" uid="uid://g0pyk7y258kx" path="res://assets/Enemies/esqueleto/death2.png" id="2_iylif"]
+[ext_resource type="Texture2D" uid="uid://bx0xpnaml3p7" path="res://assets/Enemies/esqueleto/death3.png" id="3_yaghj"]
+[ext_resource type="Texture2D" uid="uid://eklbba1j8cot" path="res://assets/Enemies/esqueleto/death4.png" id="4_gmawe"]
+[ext_resource type="Texture2D" uid="uid://bgm6wo4kbk3c0" path="res://assets/Enemies/esqueleto/death5.png" id="5_72x2f"]
+[ext_resource type="Texture2D" uid="uid://ux0u4cghp8bw" path="res://assets/Enemies/esqueleto/idle2.png" id="6_pbeo7"]
+[ext_resource type="Texture2D" uid="uid://bqieq6nqfv86g" path="res://assets/Enemies/esqueleto/idle1.png" id="7_8s5kx"]
+[ext_resource type="Texture2D" uid="uid://cmw5damd51sqa" path="res://assets/Enemies/esqueleto/idle3.png" id="8_lob5c"]
+[ext_resource type="Texture2D" uid="uid://ce7xitto1ipg6" path="res://assets/Enemies/esqueleto/idle4.png" id="9_gqnld"]
+[ext_resource type="Texture2D" uid="uid://dh5mjyh66312x" path="res://assets/Enemies/esqueleto/walk1.png" id="10_4ep0j"]
+[ext_resource type="Texture2D" uid="uid://dg5vg6i6fy5di" path="res://assets/Enemies/esqueleto/walk2.png" id="11_du6jj"]
+[ext_resource type="Texture2D" uid="uid://bn2ip7npwrshi" path="res://assets/Enemies/esqueleto/walk3.png" id="12_8awep"]
+[ext_resource type="Texture2D" uid="uid://cib1vciuxsb0c" path="res://assets/Enemies/esqueleto/walk4.png" id="13_dmgas"]
+
+[sub_resource type="Animation" id="Animation_5j7ki"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_8s5kx")]
+}
+
+[sub_resource type="Animation" id="Animation_tqj84"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_h7pv6"), ExtResource("2_iylif"), ExtResource("3_yaghj"), ExtResource("4_gmawe"), ExtResource("5_72x2f")]
+}
+
+[sub_resource type="Animation" id="Animation_okymd"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_8s5kx"), ExtResource("6_pbeo7"), ExtResource("8_lob5c"), ExtResource("9_gqnld")]
+}
+
+[sub_resource type="Animation" id="Animation_gbi0o"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("10_4ep0j"), ExtResource("11_du6jj"), ExtResource("12_8awep"), ExtResource("13_dmgas")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7d3o"]
+_data = {
+"RESET": SubResource("Animation_5j7ki"),
+"death": SubResource("Animation_tqj84"),
+"idle": SubResource("Animation_okymd"),
+"walk": SubResource("Animation_gbi0o")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_exgh1"]
+height = 56.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_havb8"]
+radius = 12.0
+height = 58.0
+
+[node name="esqueleto" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_h5xn1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("7_8s5kx")
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["enemies"]]
+libraries = {
+"": SubResource("AnimationLibrary_y7d3o")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("CapsuleShape2D_exgh1")
+
+[node name="floor_detec" type="RayCast2D" parent="."]
+position = Vector2(-12, 0)
+target_position = Vector2(0, 32)
+collision_mask = 6
+
+[node name="wall_detec" type="RayCast2D" parent="."]
+target_position = Vector2(-12, 0)
+collision_mask = 12
+
+[node name="hitbox" type="Area2D" parent="."]
+z_index = 5
+position = Vector2(-30, 4)
+collision_layer = 8
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(31, -2)
+shape = SubResource("CapsuleShape2D_havb8")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

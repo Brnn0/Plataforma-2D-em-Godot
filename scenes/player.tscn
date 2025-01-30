@@ -1,0 +1,478 @@
+[gd_scene load_steps=45 format=3 uid="uid://be8yt32f6or2k"]
+
+[ext_resource type="Script" path="res://script/player.gd" id="1_mvgg3"]
+[ext_resource type="Texture2D" uid="uid://d3yxxf24ih6ld" path="res://assets/Player/TrevorBelmont/Jump/TrevorJumpt2.png" id="2_b850m"]
+[ext_resource type="Texture2D" uid="uid://ced28i3gkr217" path="res://assets/Player/TrevorBelmont/Idle/Trevor1.png" id="2_tqcgh"]
+[ext_resource type="Texture2D" uid="uid://cxeqc1wvby4rt" path="res://assets/Player/TrevorBelmont/Crouch/TrevorCrouch1.png" id="2_wppgf"]
+[ext_resource type="Texture2D" uid="uid://bdqt0hhycvrwp" path="res://assets/Player/TrevorBelmont/Idle/Trevor2.png" id="3_ufxu0"]
+[ext_resource type="Texture2D" uid="uid://oganpj7by3bs" path="res://assets/Player/TrevorBelmont/Idle/Trevor3.png" id="4_wfrks"]
+[ext_resource type="Texture2D" uid="uid://0cuxk8oyvvr7" path="res://assets/Player/TrevorBelmont/Idle/Trevor5.png" id="5_5ceek"]
+[ext_resource type="Texture2D" uid="uid://b1gygyjageenr" path="res://assets/Player/TrevorBelmont/Walk/TrevorWalk1.png" id="6_os1do"]
+[ext_resource type="Texture2D" uid="uid://bktympouap6g7" path="res://assets/Player/TrevorBelmont/AtkWhip/WhiptOnly2.png" id="7_c783e"]
+[ext_resource type="Texture2D" uid="uid://pfutgfynm15i" path="res://assets/Player/TrevorBelmont/Walk/TrevorWalk2.png" id="7_yvb5a"]
+[ext_resource type="Texture2D" uid="uid://clyf8ost6qs6o" path="res://assets/Player/TrevorBelmont/Walk/TrevorWalk3.png" id="8_cflwl"]
+[ext_resource type="Texture2D" uid="uid://boffrt8fviy5i" path="res://assets/Player/TrevorBelmont/AtkWhip/WhiptOnly3.png" id="8_wyjct"]
+[ext_resource type="Texture2D" uid="uid://udmottyaurtn" path="res://assets/Player/TrevorBelmont/AtkWhip/WhiptOnly4.png" id="9_eymm0"]
+[ext_resource type="Texture2D" uid="uid://2psf0lp7twv0" path="res://assets/Player/TrevorBelmont/Walk/TrevorWalk4.png" id="9_hglqf"]
+[ext_resource type="Texture2D" uid="uid://2t27r8fcwi2k" path="res://assets/Player/TrevorBelmont/Jump/TrevorJumpt1.png" id="10_o6jjd"]
+[ext_resource type="Texture2D" uid="uid://geffx8qngsdo" path="res://assets/Player/TrevorBelmont/Hurt/TrevorHurt.png" id="11_eop41"]
+[ext_resource type="Texture2D" uid="uid://cl4ao3b7wecn" path="res://assets/Player/TrevorBelmont/Hurt/TrevorHurt2.png" id="12_o68g8"]
+[ext_resource type="Texture2D" uid="uid://bt26nk48d2ycj" path="res://assets/Player/TrevorBelmont/Attack/TrevorAtk1.png" id="13_3g6a5"]
+[ext_resource type="Texture2D" uid="uid://bln486mdvhqs8" path="res://assets/Player/TrevorBelmont/Attack/TrevorAtk2.png" id="14_x1goy"]
+[ext_resource type="Texture2D" uid="uid://lepq8kfhoxgs" path="res://assets/Player/TrevorBelmont/Attack/TrevorAtk3.png" id="15_h54ev"]
+[ext_resource type="Texture2D" uid="uid://dbhj85mtw6i0x" path="res://assets/Player/TrevorBelmont/AtkWhip/WhiptOnly1.png" id="16_x6h5v"]
+[ext_resource type="Texture2D" uid="uid://bafgoaut4ihmc" path="res://assets/Player/TrevorBelmont/Jump/TrevorJumpt3.png" id="21_7vqlq"]
+[ext_resource type="Texture2D" uid="uid://bggrln3h05ksd" path="res://assets/Player/TrevorBelmont/Jump/TrevorJumpt4.png" id="22_d1qnb"]
+[ext_resource type="Texture2D" uid="uid://7yr3ls0kslmg" path="res://assets/Player/TrevorBelmont/Crouch/TrevorCrouch2.png" id="24_480jb"]
+[ext_resource type="Texture2D" uid="uid://be32ss7a7d5hf" path="res://assets/Player/TrevorBelmont/Crouch/TrevorCrouch3.png" id="25_ks7wg"]
+[ext_resource type="Texture2D" uid="uid://b34cipbjvi71k" path="res://assets/Player/TrevorBelmont/Crouch/TrevorCrouch4.png" id="26_yssth"]
+[ext_resource type="Texture2D" uid="uid://3ue4gbulqeju" path="res://assets/Player/TrevorBelmont/Hurt/TrevorDead.png" id="27_y0bpq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cctm7"]
+height = 62.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jgfp7"]
+height = 46.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6sfxa"]
+
+[sub_resource type="Animation" id="Animation_ogp6f"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [ExtResource("2_tqcgh")]
+}
+
+[sub_resource type="Animation" id="Animation_hhwaq"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("13_3g6a5"), ExtResource("14_x1goy"), ExtResource("15_h54ev"), ExtResource("15_h54ev")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whip/Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("16_x6h5v"), ExtResource("7_c783e"), ExtResource("8_wyjct"), ExtResource("9_eymm0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("whip/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:attacking")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("whip:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dvx7n"]
+resource_name = "crouch"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_wppgf")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whip/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bi3eg"]
+resource_name = "crouch_attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0666667, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("24_480jb"), ExtResource("24_480jb"), ExtResource("25_ks7wg"), ExtResource("26_yssth"), ExtResource("26_yssth")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whip/Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("16_x6h5v"), ExtResource("7_c783e"), ExtResource("8_wyjct"), ExtResource("9_eymm0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("whip:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("whip/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:attacking")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7dyem"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("27_y0bpq")]
+}
+
+[sub_resource type="Animation" id="Animation_vwfxp"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("11_eop41"), ExtResource("12_o68g8"), ExtResource("11_eop41"), ExtResource("12_o68g8"), ExtResource("11_eop41")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whip/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_t725o"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.366667, 0.566667, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("2_tqcgh"), ExtResource("3_ufxu0"), ExtResource("4_wfrks"), ExtResource("5_5ceek"), ExtResource("2_tqcgh")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whip/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_d1a3d"]
+resource_name = "jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [ExtResource("10_o6jjd")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whip/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_t0n2j"]
+resource_name = "jump_attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_b850m"), ExtResource("21_7vqlq"), ExtResource("22_d1qnb"), ExtResource("22_d1qnb")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whip/Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("16_x6h5v"), ExtResource("7_c783e"), ExtResource("8_wyjct"), ExtResource("9_eymm0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("whip/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:attacking")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("whip:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nyvsi"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trevor:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1.10957),
+"update": 1,
+"values": [ExtResource("6_os1do"), ExtResource("7_yvb5a"), ExtResource("8_cflwl"), ExtResource("9_hglqf")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whip/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rwpyv"]
+_data = {
+"RESET": SubResource("Animation_ogp6f"),
+"attack": SubResource("Animation_hhwaq"),
+"crouch": SubResource("Animation_dvx7n"),
+"crouch_attack": SubResource("Animation_bi3eg"),
+"death": SubResource("Animation_7dyem"),
+"hit": SubResource("Animation_vwfxp"),
+"idle": SubResource("Animation_t725o"),
+"jump": SubResource("Animation_d1a3d"),
+"jump_attack": SubResource("Animation_t0n2j"),
+"walk": SubResource("Animation_nyvsi")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kx2mi"]
+size = Vector2(90, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5qc00"]
+radius = 12.0
+height = 66.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lbosk"]
+radius = 11.0
+height = 50.0
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 5
+collision_mask = 110
+floor_constant_speed = true
+script = ExtResource("1_mvgg3")
+
+[node name="Trevor" type="Sprite2D" parent="."]
+texture = ExtResource("2_tqcgh")
+
+[node name="collisionStand" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("CapsuleShape2D_cctm7")
+
+[node name="collisionCrouch" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 9)
+shape = SubResource("CapsuleShape2D_jgfp7")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6sfxa"),
+"anim": SubResource("AnimationLibrary_rwpyv")
+}
+
+[node name="whip" type="Area2D" parent="."]
+collision_mask = 104
+monitorable = false
+priority = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="whip"]
+position = Vector2(23, -8)
+texture = ExtResource("9_eymm0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="whip"]
+position = Vector2(58, -10)
+shape = SubResource("RectangleShape2D_kx2mi")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 9
+
+[node name="AreaCollisionStand" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 1)
+shape = SubResource("CapsuleShape2D_5qc00")
+debug_color = Color(0.772613, 0.411447, 0.445618, 0.42)
+
+[node name="AreaCollisionCrouch" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 9)
+shape = SubResource("CapsuleShape2D_lbosk")
+debug_color = Color(0.923643, 0.253234, 0.286375, 0.42)
