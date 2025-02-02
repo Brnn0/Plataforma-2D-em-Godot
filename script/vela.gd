@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Whip") and not breaking:
+		print("hello world")
 		take_damage(1)
 
 func take_damage(damage_amount : int):

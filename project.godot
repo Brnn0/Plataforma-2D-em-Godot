@@ -89,7 +89,7 @@ attack={
 2d_physics/layer_5="decoracao"
 2d_physics/layer_6="itens"
 2d_physics/layer_7="hitbox"
-2d_physics/layer_8="hurtbox"
+2d_physics/layer_8="porta"
 
 [rendering]
 

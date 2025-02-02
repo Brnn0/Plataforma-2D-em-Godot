@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal health_changed
+
 @onready var animation = $AnimationPlayer
 @onready var sprite = $Trevor
 @onready var collisionStand: CollisionShape2D = $collisionStand
@@ -26,6 +28,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready() -> void:
 	GameManager.player = self
 	health = max_health
+	health_changed.emit()
 
 func _process(delta):
 
@@ -94,12 +97,6 @@ func crouch():
 		crouching = false
 
 func attack():
-	#var overlapping_objects = whip.get_overlapping_areas()
-	
-	#for area in overlapping_objects:
-		#if area.get_parent().is_in_group("Enemies"):
-			#area.get_parent().die()
-	
 	if is_on_floor() and crouching == false:
 		attacking = true
 		whip.visible = true
@@ -134,6 +131,7 @@ func take_damage(damage_amount : int):
 		animation.play("anim/hit")
 		iframes()
 		health -= damage_amount
+		health_changed.emit()
 		if health <= 0:
 			die()
 

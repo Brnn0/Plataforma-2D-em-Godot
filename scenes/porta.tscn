@@ -1,0 +1,148 @@
+[gd_scene load_steps=15 format=3 uid="uid://dbjh468pfki5y"]
+
+[ext_resource type="Script" path="res://script/porta.gd" id="1_lyjsj"]
+[ext_resource type="Texture2D" uid="uid://d243xqsh45lgs" path="res://assets/Map/TileMap/Porta/porta1.png" id="1_mstl1"]
+[ext_resource type="Texture2D" uid="uid://d3c33chra4f4a" path="res://assets/Map/TileMap/Porta/porta3.png" id="2_j8k3h"]
+[ext_resource type="Texture2D" uid="uid://dgg3sy03ot30h" path="res://assets/Map/TileMap/Porta/porta2.png" id="3_54ajq"]
+[ext_resource type="Texture2D" uid="uid://rjru1ct3qrfh" path="res://assets/Map/TileMap/Porta/porta5.png" id="3_qd8uq"]
+[ext_resource type="Texture2D" uid="uid://hfoiipfesku6" path="res://assets/Map/TileMap/Porta/porta4.png" id="4_ry5ib"]
+
+[sub_resource type="Animation" id="Animation_amhct"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_mstl1")]
+}
+
+[sub_resource type="Animation" id="Animation_trnpy"]
+resource_name = "closed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_mstl1")]
+}
+
+[sub_resource type="Animation" id="Animation_sryi8"]
+resource_name = "closing"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_qd8uq"), ExtResource("4_ry5ib"), ExtResource("2_j8k3h"), ExtResource("3_54ajq"), ExtResource("1_mstl1")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:open")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_318gk"]
+resource_name = "opening"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_mstl1"), ExtResource("3_54ajq"), ExtResource("2_j8k3h"), ExtResource("4_ry5ib"), ExtResource("3_qd8uq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:open")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_uj03f"]
+resource_name = "openned"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_qd8uq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iv73m"]
+_data = {
+"RESET": SubResource("Animation_amhct"),
+"closed": SubResource("Animation_trnpy"),
+"closing": SubResource("Animation_sryi8"),
+"opening": SubResource("Animation_318gk"),
+"openned": SubResource("Animation_uj03f")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fval"]
+size = Vector2(7, 93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ih5s7"]
+size = Vector2(20, 62)
+
+[node name="porta" type="StaticBody2D"]
+script = ExtResource("1_lyjsj")
+open = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mstl1")
+
+[node name="animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iv73m")
+}
+
+[node name="colisaoPorta" type="CollisionShape2D" parent="."]
+position = Vector2(11.5, -16.5)
+shape = SubResource("RectangleShape2D_5fval")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+
+[node name="colisaoArea" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ih5s7")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

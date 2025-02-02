@@ -57,7 +57,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhla"]
 size = Vector2(37, 66)
 
-[node name="tocha" type="StaticBody2D"]
+[node name="tocha" type="StaticBody2D" groups=["Enemies"]]
 collision_layer = 32
 script = ExtResource("1_usp8x")
 
@@ -67,7 +67,6 @@ shape = SubResource("RectangleShape2D_t25co")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w8sdr")
-autoplay = "default"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32
