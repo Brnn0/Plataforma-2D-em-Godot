@@ -1,13 +1,9 @@
 extends Node2D
 class_name Checkpoint
 
-@export var spawnpont = false
+@export var spawnpoint = false
 
 var activated = false
-
-func _ready() -> void:
-	if spawnpont:
-		activate()
 
 func activate():
 	GameManager.current_checkpoint = self

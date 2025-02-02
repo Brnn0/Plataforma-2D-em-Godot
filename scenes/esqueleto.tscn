@@ -95,16 +95,16 @@ height = 56.0
 radius = 12.0
 height = 58.0
 
-[node name="esqueleto" type="CharacterBody2D" groups=["enemies"]]
+[node name="esqueleto" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 7
 script = ExtResource("1_h5xn1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("7_8s5kx")
 flip_h = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["enemies"]]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_y7d3o")
 }
@@ -115,18 +115,19 @@ shape = SubResource("CapsuleShape2D_exgh1")
 
 [node name="floor_detec" type="RayCast2D" parent="."]
 position = Vector2(-12, 0)
-target_position = Vector2(0, 32)
+target_position = Vector2(0, 31)
 collision_mask = 6
 
 [node name="wall_detec" type="RayCast2D" parent="."]
 target_position = Vector2(-12, 0)
 collision_mask = 12
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="hitbox" type="Area2D" parent="." groups=["Enemies"]]
 z_index = 5
 position = Vector2(-30, 4)
 collision_layer = 8
 collision_mask = 9
+collision_priority = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(31, -2)

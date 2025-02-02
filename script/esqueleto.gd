@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const SPEED = 2000.0
 const JUMP_VELOCITY = -400.0
 var direction := -1
@@ -10,6 +9,8 @@ var direction := -1
 @onready var floor_detec: RayCast2D = $floor_detec
 @onready var collision_2: CollisionShape2D = $hitbox/collision2
 
+func _ready() -> void:
+	animation.play("walk")
 
 func _physics_process(delta: float) -> void:
 	
@@ -32,5 +33,8 @@ func flip():
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Player:
+	if area.get_parent() is Player and not is_in_group("Whip"):
 		area.get_parent().die()
+
+func die():
+	queue_free()

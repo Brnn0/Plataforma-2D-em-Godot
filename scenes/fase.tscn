@@ -734,6 +734,12 @@ position = Vector2(392, 485)
 [node name="heart2" parent="items" instance=ExtResource("14_38tbr")]
 position = Vector2(611, 410)
 
-[node name="Checkpoint" parent="." instance=ExtResource("14_5uwob")]
+[node name="checkpoints" type="Node2D" parent="."]
 z_index = 5
 position = Vector2(1528, 413)
+
+[node name="Checkpoint2" parent="checkpoints" instance=ExtResource("14_5uwob")]
+position = Vector2(-1302, 42)
+
+[node name="Checkpoint" parent="checkpoints" instance=ExtResource("14_5uwob")]
+z_index = 5
