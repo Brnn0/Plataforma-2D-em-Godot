@@ -32,7 +32,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_tqj84"]
 resource_name = "death"
-length = 0.5
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,6 +44,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("1_h7pv6"), ExtResource("2_iylif"), ExtResource("3_yaghj"), ExtResource("4_gmawe"), ExtResource("5_72x2f")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_okymd"]
@@ -97,7 +111,7 @@ height = 58.0
 
 [node name="esqueleto" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 8
-collision_mask = 7
+collision_mask = 6
 script = ExtResource("1_h5xn1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -127,7 +141,6 @@ z_index = 5
 position = Vector2(-30, 4)
 collision_layer = 8
 collision_mask = 9
-collision_priority = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(31, -2)

@@ -12,23 +12,28 @@ class_name Player
 
 @export var SPEED = 120.0
 @export var JUMP_VELOCITY = -300.0
+@export var hit = false
+@export var is_alive = true
 
 var attacking = false
 var crouching = false
-var is_alive = true
+var max_health = 3
+var health = 0
+var can_take_damage = true
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	GameManager.player = self
+	health = max_health
 
 func _process(delta):
 
 	if is_alive == true:
-		if Input.is_action_just_pressed("attack"):
+		if Input.is_action_just_pressed("attack") and !hit:
 			attack()
 			
-		if Input.is_action_pressed("move_down"):
+		if Input.is_action_pressed("move_down") and !hit:
 			crouching = true
 			crouch()
 
@@ -39,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	area_collisionStand.disabled = false
 	area_collisionCrouch.disabled = true
 
-	if is_alive == true:
+	if is_alive == true and !hit:
 		if  Input.is_action_just_pressed("move_left"):
 			sprite.scale.x = abs(sprite.scale.x) * -1
 			whip.scale.x = abs(sprite.scale.x) * -1
@@ -89,11 +94,11 @@ func crouch():
 		crouching = false
 
 func attack():
-	var overlapping_objects = whip.get_overlapping_areas()
+	#var overlapping_objects = whip.get_overlapping_areas()
 	
-	for area in overlapping_objects:
-		if area.get_parent().is_in_group("Enemies"):
-			area.get_parent().die()
+	#for area in overlapping_objects:
+		#if area.get_parent().is_in_group("Enemies"):
+			#area.get_parent().die()
 	
 	if is_on_floor() and crouching == false:
 		attacking = true
@@ -107,8 +112,12 @@ func attack():
 		whip.visible = true
 		animation.play("anim/jump_attack")
 
+func _on_whip_area_entered(area: Area2D) -> void:
+	if area.get_parent().is_in_group("Enemies"):
+			area.get_parent().take_damage(3)
+
 func update_animation():
-	if !attacking and is_alive == true:
+	if !attacking and !hit and is_alive != false:
 		crouching= false
 		whip.visible = false
 		if is_on_floor() and velocity.x != 0:
@@ -118,9 +127,25 @@ func update_animation():
 		if is_on_floor() == false:
 			animation.play("anim/jump")
 
+func take_damage(damage_amount : int):
+	if can_take_damage:
+		hit = true
+		attacking = false
+		animation.play("anim/hit")
+		iframes()
+		health -= damage_amount
+		if health <= 0:
+			die()
+
+func iframes():
+	can_take_damage = false
+	await get_tree().create_timer(1).timeout
+	can_take_damage = true
+	
 func die():
 	is_alive = false
 	whip.visible = false
-	animation.play("anim/death")
-	await animation.animation_finished
+	if is_alive == false:
+		animation.play("anim/death")
+		await animation.animation_finished
 	GameManager.respawn_player()

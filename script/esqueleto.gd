@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 2000.0
+var SPEED = 2000.0
 const JUMP_VELOCITY = -400.0
 var direction := -1
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -9,8 +9,13 @@ var direction := -1
 @onready var floor_detec: RayCast2D = $floor_detec
 @onready var collision_2: CollisionShape2D = $hitbox/collision2
 
+var max_health = 3
+var health = 0
+var dead = false
+
 func _ready() -> void:
 	animation.play("walk")
+	var health = max_health
 
 func _physics_process(delta: float) -> void:
 	
@@ -24,7 +29,6 @@ func _physics_process(delta: float) -> void:
 	
 	velocity.x = direction * SPEED * delta
 	
-	
 	move_and_slide()
 	
 func flip():
@@ -33,8 +37,15 @@ func flip():
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Player and not is_in_group("Whip"):
-		area.get_parent().die()
+	if area.get_parent() is Player and not is_in_group("Whip") and !dead:
+		area.get_parent().take_damage(1)
+
+func take_damage(damage_amount : int):
+	health -= damage_amount
+	if health <= 0:
+		die()
 
 func die():
-	queue_free()
+	dead = true
+	SPEED = 0
+	animation.play("death")

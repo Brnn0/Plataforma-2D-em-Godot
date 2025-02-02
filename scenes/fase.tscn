@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://c7bgy5epoapmk" path="res://assets/Map/backgrounds/ruinas1.png" id="9_kgo0k"]
 [ext_resource type="PackedScene" uid="uid://bacxn1pt73rxw" path="res://scenes/esqueleto.tscn" id="12_sgcvl"]
 [ext_resource type="PackedScene" uid="uid://lmvp4qvnqxun" path="res://scenes/checkpoint.tscn" id="14_5uwob"]
-[ext_resource type="PackedScene" uid="uid://cfw4sbnc04qxi" path="res://scenes/heart.tscn" id="14_38tbr"]
+[ext_resource type="PackedScene" uid="uid://d03eo4ivodv33" path="res://scenes/tocha.tscn" id="15_ykqb8"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_1a32i"]
 a = Vector2(2, 519)
@@ -728,11 +728,8 @@ drag_bottom_margin = 0.0
 [node name="items" type="Node2D" parent="."]
 z_index = 4
 
-[node name="heart" parent="items" instance=ExtResource("14_38tbr")]
-position = Vector2(392, 485)
-
-[node name="heart2" parent="items" instance=ExtResource("14_38tbr")]
-position = Vector2(611, 410)
+[node name="tocha" parent="items" instance=ExtResource("15_ykqb8")]
+position = Vector2(451, 480)
 
 [node name="checkpoints" type="Node2D" parent="."]
 z_index = 5
