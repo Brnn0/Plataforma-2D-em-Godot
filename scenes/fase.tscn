@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://jlu1oxqpexu7"]
+[gd_scene load_steps=32 format=4 uid="uid://jlu1oxqpexu7"]
 
 [ext_resource type="PackedScene" uid="uid://be8yt32f6or2k" path="res://scenes/player.tscn" id="1_2pjja"]
 [ext_resource type="Texture2D" uid="uid://be5rv5q7ndclp" path="res://assets/Map/Itens/Objetos/heart.png" id="1_5wb6m"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://bacxn1pt73rxw" path="res://scenes/esqueleto.tscn" id="12_sgcvl"]
 [ext_resource type="PackedScene" uid="uid://lmvp4qvnqxun" path="res://scenes/checkpoint.tscn" id="14_5uwob"]
 [ext_resource type="PackedScene" uid="uid://d03eo4ivodv33" path="res://scenes/tocha.tscn" id="15_ykqb8"]
-[ext_resource type="PackedScene" uid="uid://dkyqda8vmc51l" path="res://scenes/vela.tscn" id="16_8vam6"]
 [ext_resource type="PackedScene" uid="uid://dbjh468pfki5y" path="res://scenes/porta.tscn" id="18_dmynb"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_1a32i"]
@@ -562,15 +561,16 @@ sources/1 = SubResource("TileSetAtlasSource_4gsn2")
 script = ExtResource("1_i8hqa")
 
 [node name="hearticon" type="TextureRect" parent="UIManager"]
-offset_left = 49.0
+offset_left = 50.0
 offset_top = 18.0
-offset_right = 81.0
+offset_right = 82.0
 offset_bottom = 50.0
 texture = ExtResource("1_5wb6m")
 metadata/_edit_use_anchors_ = true
 
 [node name="heartdisplay" type="Label" parent="UIManager"]
 anchors_preset = -1
+anchor_top = -0.0296296
 anchor_bottom = -0.0296296
 offset_left = 75.0
 offset_top = 31.0
@@ -600,6 +600,39 @@ texture_under = ExtResource("3_4c8ik")
 texture_progress = ExtResource("4_os4k8")
 script = ExtResource("5_k5wbt")
 player = NodePath("../../Player")
+metadata/_edit_use_anchors_ = true
+
+[node name="livesX" type="Label" parent="UIManager/healthbar"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 11.0
+offset_right = 139.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_tp8dg")
+theme_override_font_sizes/font_size = 15
+text = "x"
+
+[node name="livesdisplay" type="Label" parent="UIManager/healthbar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.528
+anchor_top = -0.605263
+anchor_right = 0.528
+anchor_bottom = -0.605263
+offset_left = 75.0
+offset_top = 31.0
+offset_right = 178.0
+offset_bottom = 54.0
+theme_override_colors/font_color = Color(0.927973, 0.893801, 0.85606, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_tp8dg")
+theme_override_font_sizes/font_size = 15
+text = "0
+"
+vertical_alignment = 1
+justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="icon" type="TextureRect" parent="UIManager"]
@@ -743,12 +776,6 @@ z_index = 4
 
 [node name="tocha" parent="items" instance=ExtResource("15_ykqb8")]
 position = Vector2(451, 480)
-
-[node name="vela" parent="items" instance=ExtResource("16_8vam6")]
-position = Vector2(332, 470)
-
-[node name="vela2" parent="items" instance=ExtResource("16_8vam6")]
-position = Vector2(792, 341)
 
 [node name="checkpoints" type="Node2D" parent="."]
 z_index = 5

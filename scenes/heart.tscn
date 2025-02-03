@@ -1,21 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfw4sbnc04qxi"]
+[gd_scene load_steps=5 format=3 uid="uid://bntxn6w5gcvgi"]
 
 [ext_resource type="Script" path="res://script/heart.gd" id="1_7bb5i"]
 [ext_resource type="Texture2D" uid="uid://be5rv5q7ndclp" path="res://assets/Map/Itens/Objetos/heart.png" id="1_75vrt"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oixln"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_fn0gu"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cujyx"]
 radius = 8.0
 
-[node name="heart" type="Node2D" groups=["Enemies"]]
+[node name="heart" type="RigidBody2D"]
+collision_mask = 7
+mass = 0.024
+gravity_scale = 0.2
+contact_monitor = true
 script = ExtResource("1_7bb5i")
+
+[node name="raycast_bot" type="RayCast2D" parent="."]
+target_position = Vector2(0, 8)
+collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_75vrt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fn0gu")
 
 [node name="Area2D" type="Area2D" parent="."]
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_oixln")
+shape = SubResource("CircleShape2D_cujyx")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

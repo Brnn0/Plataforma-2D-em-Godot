@@ -19,6 +19,8 @@ signal health_changed
 
 var attacking = false
 var crouching = false
+var max_lives = 3
+var lives = 0
 var max_health = 3
 var health = 0
 var can_take_damage = true
@@ -27,6 +29,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	GameManager.player = self
+	lives = max_lives
 	health = max_health
 	health_changed.emit()
 
@@ -46,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	collisionCrouch.disabled = true
 	area_collisionStand.disabled = false
 	area_collisionCrouch.disabled = true
-
+	
 	if is_alive == true and !hit:
 		if  Input.is_action_just_pressed("move_left"):
 			sprite.scale.x = abs(sprite.scale.x) * -1
@@ -76,6 +79,7 @@ func _physics_process(delta: float) -> void:
 				velocity.x = 0
 	else:
 		velocity.x = 0
+		velocity.y = 0
 	update_animation()
 	move_and_slide()
 
@@ -141,6 +145,7 @@ func iframes():
 	can_take_damage = true
 	
 func die():
+	hit = false
 	is_alive = false
 	whip.visible = false
 	if is_alive == false:
