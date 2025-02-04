@@ -11,8 +11,9 @@ radius = 8.0
 
 [node name="heart" type="RigidBody2D"]
 collision_mask = 7
-mass = 0.024
-gravity_scale = 0.2
+mass = 0.02
+gravity_scale = 0.02
+lock_rotation = true
 contact_monitor = true
 script = ExtResource("1_7bb5i")
 

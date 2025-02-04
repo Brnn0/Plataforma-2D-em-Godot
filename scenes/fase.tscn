@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://jlu1oxqpexu7"]
+[gd_scene load_steps=33 format=4 uid="uid://jlu1oxqpexu7"]
 
 [ext_resource type="PackedScene" uid="uid://be8yt32f6or2k" path="res://scenes/player.tscn" id="1_2pjja"]
 [ext_resource type="Texture2D" uid="uid://be5rv5q7ndclp" path="res://assets/Map/Itens/Objetos/heart.png" id="1_5wb6m"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://lmvp4qvnqxun" path="res://scenes/checkpoint.tscn" id="14_5uwob"]
 [ext_resource type="PackedScene" uid="uid://d03eo4ivodv33" path="res://scenes/tocha.tscn" id="15_ykqb8"]
 [ext_resource type="PackedScene" uid="uid://dbjh468pfki5y" path="res://scenes/porta.tscn" id="18_dmynb"]
+[ext_resource type="PackedScene" uid="uid://d3xtne6ddgpfp" path="res://scenes/vela.tscn" id="24_h5d6h"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_1a32i"]
 a = Vector2(2, 519)
@@ -757,6 +758,7 @@ position = Vector2(232, 480)
 collision_mask = 7
 floor_snap_length = 10.0
 JUMP_VELOCITY = -350.0
+max_health = 3
 
 [node name="camera" type="Camera2D" parent="Player"]
 position = Vector2(0, -16)
@@ -786,3 +788,6 @@ position = Vector2(-1302, 42)
 
 [node name="Checkpoint" parent="checkpoints" instance=ExtResource("14_5uwob")]
 z_index = 5
+
+[node name="vela" parent="." instance=ExtResource("24_h5d6h")]
+position = Vector2(331, 448)

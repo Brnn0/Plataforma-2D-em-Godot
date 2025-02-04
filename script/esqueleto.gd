@@ -8,10 +8,12 @@ var direction := -1
 @onready var wall_detec: RayCast2D = $wall_detec
 @onready var floor_detec: RayCast2D = $floor_detec
 @onready var collision_2: CollisionShape2D = $hitbox/collision2
+var damage = 1
 
 var max_health = 3
 var health = 0
 var dead = false
+var player_in = false
 
 func _ready() -> void:
 	animation.play("walk")
@@ -35,10 +37,17 @@ func flip():
 	direction *= -1
 	scale.x = abs(scale.x) * -1
 
+func player_inside():
+	if player_in == true:
+		take_damage(damage)
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Player and not is_in_group("Whip") and !dead:
-		area.get_parent().take_damage(1)
+		area.get_parent().take_damage(damage)
+		player_in = true
+
+func _on_hitbox_area_exited(area: Area2D) -> void:
+	player_in = false
 
 func take_damage(damage_amount : int):
 	health -= damage_amount

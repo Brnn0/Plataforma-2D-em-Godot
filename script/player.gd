@@ -21,7 +21,7 @@ var attacking = false
 var crouching = false
 var max_lives = 3
 var lives = 0
-var max_health = 3
+@export var max_health = 3
 var health = 0
 var can_take_damage = true
 
@@ -77,9 +77,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			if is_on_floor():
 				velocity.x = 0
-	else:
+	if !hit and is_alive == false:
 		velocity.x = 0
-		velocity.y = 0
+		velocity.y = 1 * gravity * 0.2
+		
+		
 	update_animation()
 	move_and_slide()
 
