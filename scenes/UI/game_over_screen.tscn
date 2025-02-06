@@ -45,8 +45,12 @@ theme_override_fonts/font = ExtResource("1_s2v1q")
 theme_override_font_sizes/font_size = 20
 text = " Restart "
 
+[node name="quit" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer"]
+layout_mode = 2
+
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_jl1bx")
 volume_db = -15.0
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/quit" to="." method="_on_quit_pressed"]
