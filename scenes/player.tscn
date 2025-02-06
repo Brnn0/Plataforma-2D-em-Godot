@@ -1,9 +1,11 @@
-[gd_scene load_steps=45 format=3 uid="uid://be8yt32f6or2k"]
+[gd_scene load_steps=52 format=3 uid="uid://be8yt32f6or2k"]
 
 [ext_resource type="Script" path="res://script/player.gd" id="1_mvgg3"]
+[ext_resource type="AudioStream" uid="uid://b72innil1rqd1" path="res://assets/sounds/Player/voice_attack1.wav" id="2_1ngny"]
 [ext_resource type="Texture2D" uid="uid://d3yxxf24ih6ld" path="res://assets/Player/TrevorBelmont/Jump/TrevorJumpt2.png" id="2_b850m"]
 [ext_resource type="Texture2D" uid="uid://ced28i3gkr217" path="res://assets/Player/TrevorBelmont/Idle/Trevor1.png" id="2_tqcgh"]
 [ext_resource type="Texture2D" uid="uid://cxeqc1wvby4rt" path="res://assets/Player/TrevorBelmont/Crouch/TrevorCrouch1.png" id="2_wppgf"]
+[ext_resource type="AudioStream" uid="uid://bru2p5on6tfnm" path="res://assets/sounds/Player/voice_attack2.wav" id="3_0uj6y"]
 [ext_resource type="Texture2D" uid="uid://bdqt0hhycvrwp" path="res://assets/Player/TrevorBelmont/Idle/Trevor2.png" id="3_ufxu0"]
 [ext_resource type="Texture2D" uid="uid://oganpj7by3bs" path="res://assets/Player/TrevorBelmont/Idle/Trevor3.png" id="4_wfrks"]
 [ext_resource type="Texture2D" uid="uid://0cuxk8oyvvr7" path="res://assets/Player/TrevorBelmont/Idle/Trevor5.png" id="5_5ceek"]
@@ -27,6 +29,11 @@
 [ext_resource type="Texture2D" uid="uid://be32ss7a7d5hf" path="res://assets/Player/TrevorBelmont/Crouch/TrevorCrouch3.png" id="25_ks7wg"]
 [ext_resource type="Texture2D" uid="uid://b34cipbjvi71k" path="res://assets/Player/TrevorBelmont/Crouch/TrevorCrouch4.png" id="26_yssth"]
 [ext_resource type="Texture2D" uid="uid://3ue4gbulqeju" path="res://assets/Player/TrevorBelmont/Hurt/TrevorDead.png" id="27_y0bpq"]
+[ext_resource type="AudioStream" uid="uid://57x1ctjn82hd" path="res://assets/sounds/Player/attack.wav" id="28_pu4fc"]
+[ext_resource type="AudioStream" uid="uid://bqx45i80xshqr" path="res://assets/sounds/Player/HIT.wav" id="31_gqweo"]
+[ext_resource type="AudioStream" uid="uid://dm42k2xongd7c" path="res://assets/sounds/Player/death.wav" id="32_e28pp"]
+[ext_resource type="AudioStream" uid="uid://dhnwowteudcgr" path="res://assets/sounds/Player/takingDamage.wav" id="33_pppn0"]
+[ext_resource type="AudioStream" uid="uid://dnep6xwxo3ql2" path="res://assets/sounds/Player/Player Out.mp3" id="34_kn5je"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cctm7"]
 height = 62.0
@@ -222,7 +229,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_7dyem"]
 resource_name = "death"
-length = 0.5
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -242,7 +249,7 @@ tracks/1/path = NodePath("Trevor:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2(0, 18), Vector2(0, 0)]
@@ -452,7 +459,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kx2mi"]
-size = Vector2(90, 20)
+size = Vector2(91, 20)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5qc00"]
 radius = 12.0
@@ -467,6 +474,7 @@ z_index = 5
 collision_mask = 238
 floor_constant_speed = true
 script = ExtResource("1_mvgg3")
+sfx_attack_voice = [ExtResource("2_1ngny"), ExtResource("3_0uj6y")]
 max_health = 2
 
 [node name="Trevor" type="Sprite2D" parent="."]
@@ -497,7 +505,7 @@ position = Vector2(23, -8)
 texture = ExtResource("9_eymm0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="whip"]
-position = Vector2(58, -10)
+position = Vector2(57.5, -10)
 shape = SubResource("RectangleShape2D_kx2mi")
 disabled = true
 
@@ -513,6 +521,31 @@ debug_color = Color(0.772613, 0.411447, 0.445618, 0.42)
 position = Vector2(-1, 9)
 shape = SubResource("CapsuleShape2D_lbosk")
 debug_color = Color(0.923643, 0.253234, 0.286375, 0.42)
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="sfx_whip" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("28_pu4fc")
+volume_db = -20.0
+
+[node name="sfx_hit" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("31_gqweo")
+volume_db = -20.0
+
+[node name="sfx_attack_voice" type="AudioStreamPlayer" parent="Sounds"]
+volume_db = -20.0
+
+[node name="sfx_death" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("32_e28pp")
+volume_db = -30.0
+
+[node name="sfx_take_damage" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("33_pppn0")
+volume_db = -20.0
+
+[node name="sfx_death_music" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("34_kn5je")
+volume_db = -10.0
 
 [connection signal="area_entered" from="whip" to="." method="_on_whip_area_entered"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

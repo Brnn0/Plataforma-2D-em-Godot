@@ -123,6 +123,7 @@ size = Vector2(7, 93)
 size = Vector2(20, 62)
 
 [node name="porta" type="StaticBody2D"]
+collision_layer = 9
 script = ExtResource("1_lyjsj")
 open = true
 

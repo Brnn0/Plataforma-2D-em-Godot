@@ -11,7 +11,14 @@ signal health_changed
 @onready var area_collisionCrouch: CollisionShape2D = $hurtbox/AreaCollisionCrouch
 @onready var remote_transform: RemoteTransform2D = $remote
 @onready var whip = $whip
-
+@onready var bg_music: AudioStreamPlayer = $"../Musica/bg_music"
+@onready var sfx_take_damage: AudioStreamPlayer = $Sounds/sfx_take_damage
+@onready var sfx_hit: AudioStreamPlayer = $Sounds/sfx_hit
+@onready var sfx_whip: AudioStreamPlayer = $Sounds/sfx_whip
+@onready var sfx_death: AudioStreamPlayer = $Sounds/sfx_death
+@onready var sfx_death_music: AudioStreamPlayer = $Sounds/sfx_death_music
+@onready var sfx_attack_voice_audio: AudioStreamPlayer = $Sounds/sfx_attack_voice
+@export var sfx_attack_voice : Array
 @export var SPEED = 120.0
 @export var JUMP_VELOCITY = -300.0
 @export var hit = false
@@ -19,8 +26,6 @@ signal health_changed
 
 var attacking = false
 var crouching = false
-var max_lives = 3
-var lives = 0
 @export var max_health = 3
 var health = 0
 var can_take_damage = true
@@ -29,9 +34,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	GameManager.player = self
-	lives = max_lives
 	health = max_health
 	health_changed.emit()
+	if is_alive == true:
+		bg_music.play()
 
 func _process(delta):
 
@@ -103,6 +109,9 @@ func crouch():
 		crouching = false
 
 func attack():
+	var attack_voice = sfx_attack_voice[randi() % sfx_attack_voice.size()]
+	sfx_attack_voice_audio.stream = attack_voice
+	
 	if is_on_floor() and crouching == false:
 		attacking = true
 		whip.visible = true
@@ -114,10 +123,14 @@ func attack():
 		attacking = true
 		whip.visible = true
 		animation.play("anim/jump_attack")
+	if attacking == true:
+		sfx_whip.play()
+		sfx_attack_voice_audio.play()
 
 func _on_whip_area_entered(area: Area2D) -> void:
 	if area.get_parent().is_in_group("Enemies"):
 			area.get_parent().take_damage(3)
+			sfx_hit.play()
 
 func update_animation():
 	if !attacking and !hit and is_alive != false:
@@ -135,6 +148,7 @@ func take_damage(damage_amount : int):
 		hit = true
 		attacking = false
 		animation.play("anim/hit")
+		sfx_take_damage.play()
 		iframes()
 		health -= damage_amount
 		health_changed.emit()
@@ -151,6 +165,9 @@ func die():
 	is_alive = false
 	whip.visible = false
 	if is_alive == false:
+		bg_music.stop()
 		animation.play("anim/death")
+		sfx_death_music.play()
+		sfx_death.play()
 		await animation.animation_finished
 	GameManager.respawn_player()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bacxn1pt73rxw"]
+[gd_scene load_steps=23 format=3 uid="uid://bacxn1pt73rxw"]
 
 [ext_resource type="Script" path="res://script/esqueleto.gd" id="1_h5xn1"]
 [ext_resource type="Texture2D" uid="uid://cxq8cvvdglc0y" path="res://assets/Enemies/esqueleto/death1.png" id="1_h7pv6"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dg5vg6i6fy5di" path="res://assets/Enemies/esqueleto/walk2.png" id="11_du6jj"]
 [ext_resource type="Texture2D" uid="uid://bn2ip7npwrshi" path="res://assets/Enemies/esqueleto/walk3.png" id="12_8awep"]
 [ext_resource type="Texture2D" uid="uid://cib1vciuxsb0c" path="res://assets/Enemies/esqueleto/walk4.png" id="13_dmgas"]
+[ext_resource type="AudioStream" uid="uid://jrghnbfjjmn3" path="res://assets/sounds/Skeleton/snd_skeleton_destroyed.wav" id="15_jm384"]
 
 [sub_resource type="Animation" id="Animation_5j7ki"]
 length = 0.001
@@ -145,6 +146,12 @@ collision_mask = 9
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(31, -2)
 shape = SubResource("CapsuleShape2D_havb8")
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="sfx_death" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("15_jm384")
+volume_db = -30.0
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="hitbox" to="." method="_on_hitbox_area_exited"]
