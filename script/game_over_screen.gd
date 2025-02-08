@@ -1,6 +1,6 @@
 extends CanvasLayer
 @onready var music: AudioStreamPlayer = $music
-@onready var restart_button: Button = $PanelContainer/MarginContainer/Rows/CenterContainer/RestartButton
+@onready var restart_button: Button = $PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/RestartButton
 
 func _ready() -> void:
 	music.play()

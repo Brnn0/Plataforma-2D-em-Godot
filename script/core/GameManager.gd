@@ -2,6 +2,8 @@ extends Node
 
 signal gained_hearts(int)
 signal losed_lives(int)
+const GETHEART = preload("res://assets/sounds/Items/GETHEART.wav")
+var sfx_collect: AudioStreamWAV = GETHEART
 
 var hearts : int
 var current_checkpoint: Checkpoint
@@ -24,4 +26,5 @@ func respawn_player():
 		
 func gain_hearts(hearts_gained):
 	hearts += hearts_gained
+	sfx_collect
 	emit_signal("gained_hearts", hearts_gained)

@@ -1,22 +1,57 @@
-[gd_scene load_steps=7 format=3 uid="uid://vjn88qgawbf4"]
+[gd_scene load_steps=11 format=3 uid="uid://vjn88qgawbf4"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_praec"]
-[ext_resource type="Texture2D" uid="uid://btib7y0wyyqah" path="res://assets/hud/MenuBg.png" id="2_h4o0u"]
+[ext_resource type="Texture2D" uid="uid://bam8yyjr37c8n" path="res://assets/Map/background parallax/bg1.png" id="2_o11t2"]
 [ext_resource type="FontFile" uid="uid://8q34sjw57dtd" path="res://assets/fonts/Bradley.ttf" id="3_mxvwn"]
 [ext_resource type="FontFile" uid="uid://cy8q22tqxop6f" path="res://assets/fonts/alagard.ttf" id="4_k5cvj"]
 [ext_resource type="AudioStream" uid="uid://r3eysqb8bbp4" path="res://assets/sounds/UI/Intro.mp3" id="5_2oueb"]
+[ext_resource type="Texture2D" uid="uid://deu3rung61xix" path="res://assets/Map/background parallax/bg2.png" id="6_6aa01"]
+[ext_resource type="Texture2D" uid="uid://b1tljlqeub4c" path="res://assets/Map/background parallax/bgmoon.png" id="6_eqye4"]
+[ext_resource type="Texture2D" uid="uid://f45fpktisnaw" path="res://assets/Map/background parallax/bg4.png" id="8_3hytt"]
+[ext_resource type="Texture2D" uid="uid://b3yge6lmxjs0q" path="res://assets/Map/background parallax/bg3.png" id="9_eu323"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_doa61"]
-texture = ExtResource("2_h4o0u")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_if5xr"]
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_praec")
+
+[node name="Parallax" type="Node" parent="."]
+
+[node name="bg" type="Sprite2D" parent="Parallax"]
+position = Vector2(240, 135)
+texture = ExtResource("2_o11t2")
+
+[node name="moon" type="Sprite2D" parent="Parallax"]
+position = Vector2(453, 169)
+texture = ExtResource("6_eqye4")
+
+[node name="castle" type="Sprite2D" parent="Parallax"]
+position = Vector2(241, 134)
+texture = ExtResource("6_6aa01")
+
+[node name="Clouds" type="Parallax2D" parent="Parallax"]
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(8, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/Clouds"]
+position = Vector2(240, 156)
+texture = ExtResource("8_3hytt")
+
+[node name="moutain" type="Parallax2D" parent="Parallax"]
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(5, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax/moutain"]
+position = Vector2(242, 171)
+texture = ExtResource("9_eu323")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(480, 270)
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_doa61")
+theme_override_styles/panel = SubResource("StyleBoxTexture_if5xr")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -30,11 +65,11 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 78
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="TitleContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Castlevania3" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+[node name="Castlevania3" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/TitleContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.0909423, 0.0594643, 1)
 theme_override_constants/shadow_offset_y = 1
@@ -42,8 +77,9 @@ theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_mxvwn")
 theme_override_font_sizes/font_size = 25
 text = "Castlevania III"
+horizontal_alignment = 1
 
-[node name="DraculaCurse" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+[node name="DraculaCurse" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/TitleContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.831373, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)

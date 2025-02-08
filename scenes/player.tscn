@@ -537,7 +537,7 @@ volume_db = -20.0
 
 [node name="sfx_death" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("32_e28pp")
-volume_db = -30.0
+volume_db = -15.0
 
 [node name="sfx_take_damage" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("33_pppn0")
