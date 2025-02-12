@@ -17,7 +17,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func take_damage(damage_amount : int):
 	health -= damage_amount
-	if health <= 0:
+	if health <= 0 and not breaking:
 		breaking_candle()
 		
 func breaking_candle():

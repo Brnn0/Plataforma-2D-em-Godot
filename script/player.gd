@@ -26,7 +26,7 @@ signal health_changed
 
 var attacking = false
 var crouching = false
-@export var max_health = 3
+var max_health = 3
 var health = 0
 var can_take_damage = true
 
@@ -82,7 +82,7 @@ func _physics_process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 		else:
 			if is_on_floor():
-				velocity.x = 0
+				velocity = Vector2.ZERO
 	if !hit and is_alive == false:
 		velocity.x = 0
 		velocity.y = 1 * gravity * 0.2

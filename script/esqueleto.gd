@@ -9,18 +9,19 @@ var direction := -1
 @onready var floor_detec: RayCast2D = $floor_detec
 @onready var collision_2: CollisionShape2D = $hitbox/collision2
 @onready var sfx_death: AudioStreamPlayer = $Sound/sfx_death
+@onready var timer: Timer = $Timer
 
 var damage = 1
 
 var max_health = 3
 var health = 0
 var dead = false
-var player_in = false
+var can_do_damage = true
 
 func _ready() -> void:
 	animation.play("walk")
 	var health = max_health
-
+	
 func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
@@ -42,11 +43,12 @@ func flip():
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Player and not is_in_group("Whip") and !dead:
-		area.get_parent().take_damage(damage)
-		player_in = true
+		if can_do_damage == true:
+			area.get_parent().take_damage(damage)
+			timer.start(0.5)
 
 func _on_hitbox_area_exited(area: Area2D) -> void:
-	player_in = false
+	can_do_damage = true
 
 func take_damage(damage_amount : int):
 	health -= damage_amount
@@ -58,3 +60,7 @@ func die():
 	dead = true
 	SPEED = 0
 	animation.play("death")
+
+
+func _on_timer_timeout() -> void:
+	can_do_damage = true

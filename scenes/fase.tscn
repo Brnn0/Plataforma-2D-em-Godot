@@ -27,9 +27,9 @@
 [ext_resource type="PackedScene" uid="uid://dbjh468pfki5y" path="res://scenes/porta.tscn" id="18_dmynb"]
 [ext_resource type="Texture2D" uid="uid://dpnemaq347puw" path="res://assets/Map/backgrounds/ruinas2.png" id="18_o67we"]
 [ext_resource type="Texture2D" uid="uid://cslbimtdum45j" path="res://assets/Map/backgrounds/ruinas3.png" id="19_jvxqe"]
-[ext_resource type="PackedScene" uid="uid://d3xtne6ddgpfp" path="res://scenes/vela.tscn" id="24_h5d6h"]
 [ext_resource type="Texture2D" uid="uid://cmc5urgwm1aww" path="res://assets/light/light2D-gradient.png" id="26_8elwg"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="28_am3fl"]
+[ext_resource type="PackedScene" uid="uid://bh460k53ua8uy" path="res://scenes/vela.tscn" id="30_pprat"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_oimbl"]
 b = Vector2(-1, 193)
@@ -851,27 +851,21 @@ visibility_layer = 2
 z_index = 0
 position = Vector2(1359, 481)
 
-[node name="PointLight2D" type="PointLight2D" parent="items/tocha2"]
-position = Vector2(0.999994, -8)
-scale = Vector2(0.460937, 0.447266)
-color = Color(1, 1, 0.258824, 1)
-energy = 0.46
-texture = ExtResource("26_8elwg")
-
 [node name="tocha" parent="items" instance=ExtResource("15_ykqb8")]
 z_index = 0
 position = Vector2(451, 480)
 
-[node name="PointLight2D" type="PointLight2D" parent="items/tocha"]
-position = Vector2(0.999994, -8)
-scale = Vector2(0.460937, 0.447266)
-color = Color(1, 1, 0.258824, 1)
-energy = 0.46
-texture = ExtResource("26_8elwg")
+[node name="vela" parent="items" instance=ExtResource("30_pprat")]
+position = Vector2(359, 463)
 
-[node name="vela" parent="items" instance=ExtResource("24_h5d6h")]
-z_index = 0
-position = Vector2(331, 448)
+[node name="vela2" parent="items" instance=ExtResource("30_pprat")]
+position = Vector2(799, 458)
+
+[node name="vela3" parent="items" instance=ExtResource("30_pprat")]
+position = Vector2(1877, 392)
+
+[node name="vela4" parent="items" instance=ExtResource("30_pprat")]
+position = Vector2(1699, 207)
 
 [node name="inimigos" type="Node2D" parent="."]
 
@@ -890,7 +884,6 @@ position = Vector2(232, 480)
 collision_mask = 7
 floor_snap_length = 10.0
 JUMP_VELOCITY = -350.0
-max_health = 3
 
 [node name="camera" type="Camera2D" parent="Player"]
 physics_interpolation_mode = 1

@@ -1,18 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3xtne6ddgpfp"]
+[gd_scene load_steps=13 format=3 uid="uid://bh460k53ua8uy"]
 
-[ext_resource type="Script" path="res://script/vela.gd" id="1_8g1vh"]
 [ext_resource type="Texture2D" uid="uid://58p1yms782ux" path="res://assets/Map/Itens/Objetos/vela/Vela1.png" id="1_pfucx"]
+[ext_resource type="Script" path="res://script/tocha.gd" id="1_s1wap"]
 [ext_resource type="Texture2D" uid="uid://b7oe1v3j13bep" path="res://assets/Map/Itens/Objetos/vela/Vela2.png" id="2_8vv48"]
 [ext_resource type="Texture2D" uid="uid://dx3ii721hcsnf" path="res://assets/Map/Itens/Objetos/vela/Vela3.png" id="3_13lkg"]
 [ext_resource type="Texture2D" uid="uid://dgdmig74n4af0" path="res://assets/Map/Itens/Objetos/vela/VelaBreak1.png" id="5_fhxvc"]
 [ext_resource type="Texture2D" uid="uid://h6vi84pwnnon" path="res://assets/Map/Itens/Objetos/vela/VelaBreak2.png" id="6_8n0p7"]
 [ext_resource type="Texture2D" uid="uid://bkbwd0mvxfi6x" path="res://assets/Map/Itens/Objetos/vela/VelaBreak3.png" id="7_nqo85"]
 [ext_resource type="Texture2D" uid="uid://b1hbl10ten7et" path="res://assets/Map/Itens/Objetos/vela/VelaBreak4.png" id="8_a3un5"]
+[ext_resource type="Texture2D" uid="uid://cmc5urgwm1aww" path="res://assets/light/light2D-gradient.png" id="11_qy7ya"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_783yy"]
-radius = 3.16228
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t25co"]
+size = Vector2(7.5, 9)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_0cotk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_w8sdr"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -29,7 +30,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"break",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -41,28 +42,39 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_13lkg")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_elb3h"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnhla"]
+size = Vector2(16, 19)
 
 [node name="vela" type="StaticBody2D" groups=["Enemies"]]
 z_index = 4
 collision_layer = 32
-script = ExtResource("1_8g1vh")
+script = ExtResource("1_s1wap")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_783yy")
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_t25co")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_0cotk")
-animation = &"break"
+sprite_frames = SubResource("SpriteFrames_w8sdr")
+frame_progress = 0.0332244
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_elb3h")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_dnhla")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.193359, 0.189941)
+color = Color(1, 1, 0.258824, 1)
+energy = 0.46
+texture = ExtResource("11_qy7ya")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
