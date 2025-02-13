@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://be8yt32f6or2k"]
+[gd_scene load_steps=53 format=3 uid="uid://be8yt32f6or2k"]
 
 [ext_resource type="Script" path="res://script/player.gd" id="1_mvgg3"]
 [ext_resource type="AudioStream" uid="uid://b72innil1rqd1" path="res://assets/sounds/Player/voice_attack1.wav" id="2_1ngny"]
@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://dm42k2xongd7c" path="res://assets/sounds/Player/death.wav" id="32_e28pp"]
 [ext_resource type="AudioStream" uid="uid://dhnwowteudcgr" path="res://assets/sounds/Player/takingDamage.wav" id="33_pppn0"]
 [ext_resource type="AudioStream" uid="uid://dnep6xwxo3ql2" path="res://assets/sounds/Player/Player Out.mp3" id="34_kn5je"]
+[ext_resource type="AudioStream" uid="uid://dhvt0b5e7nrvs" path="res://assets/sounds/Player/sfx_jump.wav" id="35_xobvw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cctm7"]
 height = 62.0
@@ -545,6 +546,10 @@ volume_db = -20.0
 [node name="sfx_death_music" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("34_kn5je")
 volume_db = -10.0
+
+[node name="sfx_jump" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("35_xobvw")
+volume_db = -25.0
 
 [connection signal="area_entered" from="whip" to="." method="_on_whip_area_entered"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

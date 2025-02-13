@@ -11,6 +11,7 @@ signal health_changed
 @onready var area_collisionCrouch: CollisionShape2D = $hurtbox/AreaCollisionCrouch
 @onready var remote_transform: RemoteTransform2D = $remote
 @onready var whip = $whip
+@onready var sfx_jump: AudioStreamPlayer = $Sounds/sfx_jump
 @onready var bg_music: AudioStreamPlayer = $"../Musica/bg_music"
 @onready var sfx_take_damage: AudioStreamPlayer = $Sounds/sfx_take_damage
 @onready var sfx_hit: AudioStreamPlayer = $Sounds/sfx_hit
@@ -71,6 +72,7 @@ func _physics_process(delta: float) -> void:
 				position.y += 2
 			else:
 				velocity.y = JUMP_VELOCITY
+				sfx_jump.play()
 		if Input.is_action_just_released("jump"):
 			velocity.y *= 0.4
 
@@ -126,6 +128,7 @@ func attack():
 	if attacking == true:
 		sfx_whip.play()
 		sfx_attack_voice_audio.play()
+		
 
 func _on_whip_area_entered(area: Area2D) -> void:
 	if area.get_parent().is_in_group("Enemies"):

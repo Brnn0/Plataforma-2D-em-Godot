@@ -1,0 +1,242 @@
+[gd_scene load_steps=24 format=3 uid="uid://cj55n4rbobsuj"]
+
+[ext_resource type="Texture2D" uid="uid://bqieq6nqfv86g" path="res://assets/Enemies/esqueleto/idle1.png" id="2_73l2k"]
+[ext_resource type="Texture2D" uid="uid://cxq8cvvdglc0y" path="res://assets/Enemies/esqueleto/death1.png" id="3_0mjdl"]
+[ext_resource type="Texture2D" uid="uid://g0pyk7y258kx" path="res://assets/Enemies/esqueleto/death2.png" id="4_ivm61"]
+[ext_resource type="Texture2D" uid="uid://bx0xpnaml3p7" path="res://assets/Enemies/esqueleto/death3.png" id="5_7451g"]
+[ext_resource type="Texture2D" uid="uid://eklbba1j8cot" path="res://assets/Enemies/esqueleto/death4.png" id="6_0esxq"]
+[ext_resource type="Texture2D" uid="uid://bgm6wo4kbk3c0" path="res://assets/Enemies/esqueleto/death5.png" id="7_r4vnx"]
+[ext_resource type="Texture2D" uid="uid://ux0u4cghp8bw" path="res://assets/Enemies/esqueleto/idle2.png" id="8_sgxha"]
+[ext_resource type="Texture2D" uid="uid://cmw5damd51sqa" path="res://assets/Enemies/esqueleto/idle3.png" id="9_s0pra"]
+[ext_resource type="Texture2D" uid="uid://ce7xitto1ipg6" path="res://assets/Enemies/esqueleto/idle4.png" id="10_nuwrm"]
+[ext_resource type="Texture2D" uid="uid://dh5mjyh66312x" path="res://assets/Enemies/esqueleto/walk1.png" id="11_2xsp6"]
+[ext_resource type="Texture2D" uid="uid://dg5vg6i6fy5di" path="res://assets/Enemies/esqueleto/walk2.png" id="12_ee1ox"]
+[ext_resource type="Texture2D" uid="uid://bn2ip7npwrshi" path="res://assets/Enemies/esqueleto/walk3.png" id="13_0ehm7"]
+[ext_resource type="Texture2D" uid="uid://cib1vciuxsb0c" path="res://assets/Enemies/esqueleto/walk4.png" id="14_1mdje"]
+[ext_resource type="AudioStream" uid="uid://jrghnbfjjmn3" path="res://assets/sounds/Skeleton/snd_skeleton_destroyed.wav" id="15_b0fqt"]
+
+[sub_resource type="GDScript" id="GDScript_tnsfg"]
+script/source = "extends CharacterBody2D
+
+var SPEED = 2000.0
+const JUMP_VELOCITY = -400.0
+var direction := -1
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var wall_detec: RayCast2D = $wall_detec
+@onready var floor_detec: RayCast2D = $floor_detec
+@onready var collision_2: CollisionShape2D = $hitbox/collision2
+@onready var sfx_death: AudioStreamPlayer = $Sound/sfx_death
+@onready var timer: Timer = $Timer
+@onready var player_detec: Area2D = $player_detec
+
+var damage = 1
+
+var max_health = 3
+var health = 0
+var dead = false
+var can_do_damage = true
+
+func _ready() -> void:
+	animation.play(\"walk\")
+	var health = max_health
+	
+func _physics_process(delta: float) -> void:
+	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
+	if wall_detec.is_colliding():
+		flip()
+	if !floor_detec.is_colliding() && is_on_floor():
+		flip()
+	
+	velocity.x = direction * SPEED * delta
+	
+	move_and_slide()
+	
+func flip():
+	direction *= -1
+	scale.x = abs(scale.x) * -1
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Player and not is_in_group(\"Whip\") and !dead:
+		if can_do_damage == true:
+			area.get_parent().take_damage(damage)
+			timer.start(0.5)
+
+func _on_hitbox_area_exited(area: Area2D) -> void:
+	can_do_damage = true
+
+func take_damage(damage_amount : int):
+	health -= damage_amount
+	if health <= 0:
+		sfx_death.play()
+		die()
+
+func die():
+	dead = true
+	SPEED = 0
+	animation.play(\"death\")
+
+func _on_timer_timeout() -> void:
+	can_do_damage = true
+
+func _on_player_detec_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Player and not is_in_group(\"Whip\") and !dead:
+		area.get_parent().
+"
+
+[sub_resource type="Animation" id="Animation_5j7ki"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_73l2k")]
+}
+
+[sub_resource type="Animation" id="Animation_tqj84"]
+resource_name = "death"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_0mjdl"), ExtResource("4_ivm61"), ExtResource("5_7451g"), ExtResource("6_0esxq"), ExtResource("7_r4vnx")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_okymd"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_73l2k"), ExtResource("8_sgxha"), ExtResource("9_s0pra"), ExtResource("10_nuwrm")]
+}
+
+[sub_resource type="Animation" id="Animation_gbi0o"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("11_2xsp6"), ExtResource("12_ee1ox"), ExtResource("13_0ehm7"), ExtResource("14_1mdje")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7d3o"]
+_data = {
+"RESET": SubResource("Animation_5j7ki"),
+"death": SubResource("Animation_tqj84"),
+"idle": SubResource("Animation_okymd"),
+"walk": SubResource("Animation_gbi0o")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_exgh1"]
+height = 56.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_havb8"]
+radius = 12.0
+height = 58.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tbcjc"]
+radius = 171.105
+
+[node name="inimigo2" type="CharacterBody2D" groups=["Enemies"]]
+collision_layer = 8
+collision_mask = 6
+script = SubResource("GDScript_tnsfg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_73l2k")
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y7d3o")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("CapsuleShape2D_exgh1")
+
+[node name="floor_detec" type="RayCast2D" parent="."]
+position = Vector2(-12, 0)
+target_position = Vector2(0, 31)
+collision_mask = 6
+
+[node name="wall_detec" type="RayCast2D" parent="."]
+target_position = Vector2(-12, 0)
+collision_mask = 12
+
+[node name="hitbox" type="Area2D" parent="." groups=["Enemies"]]
+z_index = 5
+position = Vector2(-30, 4)
+collision_layer = 8
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(31, -2)
+shape = SubResource("CapsuleShape2D_havb8")
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="sfx_death" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("15_b0fqt")
+volume_db = -30.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="player_detec" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detec"]
+shape = SubResource("CircleShape2D_tbcjc")
+debug_color = Color(0.781585, 0.400248, 0.466238, 0.42)
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="player_detec" to="." method="_on_player_detec_area_entered"]
