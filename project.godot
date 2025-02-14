@@ -13,6 +13,7 @@ config_version=5
 config/name="Dracula's Curse remake?"
 run/main_scene="res://scenes/UI/menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -24,9 +25,8 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 
 window/size/viewport_width=480
 window/size/viewport_height=270
-window/size/extend_to_title=true
-window/stretch/mode="viewport"
-window/canvas_textures/default_texture_filter=0
+window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [editor_plugins]
 
@@ -146,3 +146,12 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+environment/ssao/quality=0
+environment/ssao/half_size=false
+environment/ssil/half_size=false
+environment/glow/upscale_mode=0
+environment/screen_space_reflection/roughness_quality=0
+environment/subsurface_scattering/subsurface_scattering_quality=0
+environment/volumetric_fog/use_filter=0
+2d/sdf/oversize=0
+2d/sdf/scale=0

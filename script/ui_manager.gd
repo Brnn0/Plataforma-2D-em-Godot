@@ -10,4 +10,4 @@ func update_heart_display(gained_hearts):
 	$heartdisplay.text = str(GameManager.hearts)
 
 func update_live_display():
-	$healthbar/livesdisplay.text = str(GameManager.lives)
+	$livesdisplay.text = str(GameManager.lives)

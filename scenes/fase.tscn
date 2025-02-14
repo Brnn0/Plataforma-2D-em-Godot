@@ -1,7 +1,6 @@
-[gd_scene load_steps=49 format=4 uid="uid://jlu1oxqpexu7"]
+[gd_scene load_steps=48 format=4 uid="uid://jlu1oxqpexu7"]
 
 [ext_resource type="PackedScene" uid="uid://be8yt32f6or2k" path="res://scenes/player.tscn" id="1_2pjja"]
-[ext_resource type="Texture2D" uid="uid://be5rv5q7ndclp" path="res://assets/Map/Itens/Objetos/heart.png" id="1_5wb6m"]
 [ext_resource type="AudioStream" uid="uid://cv83fyo06uvfj" path="res://assets/sounds/bg_music/beginning edited.mp3" id="1_47spf"]
 [ext_resource type="Texture2D" uid="uid://bam8yyjr37c8n" path="res://assets/Map/background parallax/bg1.png" id="1_fy2tp"]
 [ext_resource type="Script" path="res://script/ui_manager.gd" id="1_i8hqa"]
@@ -10,13 +9,13 @@
 [ext_resource type="FontFile" uid="uid://cy8q22tqxop6f" path="res://assets/fonts/alagard.ttf" id="3_tp8dg"]
 [ext_resource type="Texture2D" uid="uid://deu3rung61xix" path="res://assets/Map/background parallax/bg2.png" id="3_uurgk"]
 [ext_resource type="Texture2D" uid="uid://cr6ts32t2u6ii" path="res://assets/Map/background parallax/bg1up.png" id="4_ibnnq"]
-[ext_resource type="Texture2D" uid="uid://bf8kqut83yr6a" path="res://assets/hud/life bar/lifebarprogress.png" id="4_os4k8"]
 [ext_resource type="Texture2D" uid="uid://b3yge6lmxjs0q" path="res://assets/Map/background parallax/bg3.png" id="4_w86s0"]
+[ext_resource type="Texture2D" uid="uid://dsk1piwm27v4i" path="res://assets/hud/life bar/lifebarProgress.png" id="5_57s6y"]
 [ext_resource type="Script" path="res://script/healthbar.gd" id="5_k5wbt"]
-[ext_resource type="Texture2D" uid="uid://dynm8i5xgilnc" path="res://assets/hud/life bar/iconframe1.png" id="5_lde3l"]
 [ext_resource type="Texture2D" uid="uid://f45fpktisnaw" path="res://assets/Map/background parallax/bg4.png" id="5_oobm8"]
 [ext_resource type="Texture2D" uid="uid://b6s2hg0bobo5v" path="res://assets/Map/background parallax/bg5.png" id="6_ev6ns"]
 [ext_resource type="Texture2D" uid="uid://ihw230wgojwn" path="res://assets/Player/TrevorBelmont/icon/icon.png" id="6_kj1ns"]
+[ext_resource type="Texture2D" uid="uid://bt3qugm26xa5w" path="res://assets/hud/life bar/life hud.png" id="7_71ova"]
 [ext_resource type="Texture2D" uid="uid://bepmxs1n0yahp" path="res://assets/Map/background parallax/bg6.png" id="7_xwt7w"]
 [ext_resource type="Texture2D" uid="uid://4b4rpfjtuqnm" path="res://assets/Map/backgrounds/capelabg.png" id="8_opdsw"]
 [ext_resource type="Texture2D" uid="uid://c7bgy5epoapmk" path="res://assets/Map/backgrounds/ruinas1.png" id="9_kgo0k"]
@@ -628,94 +627,85 @@ parameters/looping = true
 [node name="UIManager" type="CanvasLayer" parent="."]
 script = ExtResource("1_i8hqa")
 
-[node name="hearticon" type="TextureRect" parent="UIManager"]
-offset_left = 50.0
-offset_top = 18.0
-offset_right = 82.0
-offset_bottom = 50.0
-texture = ExtResource("1_5wb6m")
-metadata/_edit_use_anchors_ = true
-
 [node name="heartdisplay" type="Label" parent="UIManager"]
 anchors_preset = -1
 anchor_top = -0.0296296
 anchor_bottom = -0.0296296
-offset_left = 75.0
-offset_top = 31.0
-offset_right = 178.0
-offset_bottom = 54.0
+offset_left = 64.0
+offset_top = 28.0
+offset_right = 167.0
+offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.927973, 0.893801, 0.85606, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_tp8dg")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 13
 text = "0
 "
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="healthbar" type="TextureProgressBar" parent="UIManager" node_paths=PackedStringArray("player")]
-offset_left = 58.0
-offset_top = -1.0
-offset_right = 183.0
-offset_bottom = 37.0
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UIManager" node_paths=PackedStringArray("player")]
+offset_left = 41.0
+offset_top = 8.0
+offset_right = 165.0
+offset_bottom = 20.0
 nine_patch_stretch = true
-stretch_margin_left = 2
-stretch_margin_top = 2
-stretch_margin_right = 2
-stretch_margin_bottom = 2
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
 texture_under = ExtResource("3_4c8ik")
-texture_progress = ExtResource("4_os4k8")
+texture_progress = ExtResource("5_57s6y")
 script = ExtResource("5_k5wbt")
 player = NodePath("../../Player")
-metadata/_edit_use_anchors_ = true
 
-[node name="livesX" type="Label" parent="UIManager/healthbar"]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 11.0
-offset_right = 139.0
-offset_bottom = 26.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_tp8dg")
-theme_override_font_sizes/font_size = 15
-text = "x"
+[node name="TextureRect" type="TextureRect" parent="UIManager"]
+offset_left = 12.0
+offset_top = 7.0
+offset_right = 60.0
+offset_bottom = 47.0
+texture = ExtResource("7_71ova")
+stretch_mode = 2
 
-[node name="livesdisplay" type="Label" parent="UIManager/healthbar"]
-layout_mode = 1
+[node name="charicon" type="TextureRect" parent="UIManager"]
+offset_left = 12.0
+offset_top = 7.0
+offset_right = 45.0
+offset_bottom = 41.0
+texture = ExtResource("6_kj1ns")
+stretch_mode = 2
+
+[node name="livesdisplay" type="Label" parent="UIManager"]
 anchors_preset = -1
-anchor_left = 0.528
-anchor_top = -0.605263
-anchor_right = 0.528
-anchor_bottom = -0.605263
-offset_left = 75.0
-offset_top = 31.0
-offset_right = 178.0
-offset_bottom = 54.0
+anchor_left = 0.504
+anchor_top = -2.83333
+anchor_right = 0.504
+anchor_bottom = -2.83333
+offset_left = -63.92
+offset_top = 767.999
+offset_right = 39.08
+offset_bottom = 790.999
 theme_override_colors/font_color = Color(0.927973, 0.893801, 0.85606, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_tp8dg")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 13
 text = "3"
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="icon" type="TextureRect" parent="UIManager"]
-offset_left = 14.0
-offset_top = 12.0
-offset_right = 54.0
-offset_bottom = 52.0
-texture = ExtResource("5_lde3l")
-metadata/_edit_use_anchors_ = true
-
-[node name="charicon" type="TextureRect" parent="UIManager"]
-offset_left = 14.0
-offset_top = 13.0
-offset_right = 54.0
-offset_bottom = 53.0
-texture = ExtResource("6_kj1ns")
+[node name="labelx" type="Label" parent="UIManager"]
+offset_left = 167.0
+offset_top = 6.0
+offset_right = 178.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_tp8dg")
+theme_override_font_sizes/font_size = 13
+text = "x
+"
 
 [node name="limite da tela" type="StaticBody2D" parent="."]
 position = Vector2(-23, 351)
@@ -880,7 +870,7 @@ position = Vector2(1862, 447)
 
 [node name="Player" parent="." instance=ExtResource("1_2pjja")]
 z_index = 0
-position = Vector2(232, 480)
+position = Vector2(232, 481)
 collision_mask = 7
 floor_snap_length = 10.0
 JUMP_VELOCITY = -350.0

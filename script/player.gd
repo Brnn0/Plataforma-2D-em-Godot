@@ -58,15 +58,10 @@ func _physics_process(delta: float) -> void:
 	area_collisionCrouch.disabled = true
 	
 	if is_alive == true and !hit:
-		if  Input.is_action_just_pressed("move_left"):
-			sprite.scale.x = abs(sprite.scale.x) * -1
-			whip.scale.x = abs(sprite.scale.x) * -1
-		if  Input.is_action_just_pressed("move_right"):
-			sprite.scale.x = abs(sprite.scale.x) * 1
-			whip.scale.x = abs(sprite.scale.x) * 1
+		
 		if not is_on_floor():
 			velocity += get_gravity() * delta
-
+		
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			if Input.is_action_pressed("move_down"):
 				position.y += 2
@@ -75,11 +70,19 @@ func _physics_process(delta: float) -> void:
 				sfx_jump.play()
 		if Input.is_action_just_released("jump"):
 			velocity.y *= 0.4
-
+			
 		if !attacking and !crouching:
 			var direction := Input.get_axis("move_left", "move_right")
 			if direction:
-				velocity.x = direction * SPEED
+				if  Input.is_action_pressed("move_left"):
+
+					sprite.scale.x = abs(sprite.scale.x) * -1
+					whip.scale.x = abs(sprite.scale.x) * -1
+					velocity.x = direction * SPEED
+				if  Input.is_action_pressed("move_right"):
+					sprite.scale.x = abs(sprite.scale.x) * 1
+					whip.scale.x = abs(sprite.scale.x) * 1
+					velocity.x = direction * SPEED
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 		else:

@@ -21,6 +21,7 @@ func respawn_player():
 		lives -= 1
 		losed_lives.emit()
 	if lives < 0:
+		hearts = 0
 		get_tree().reload_current_scene()
 		get_tree().change_scene_to_file("res://scenes/UI/game_over_screen.tscn")
 		

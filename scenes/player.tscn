@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://be8yt32f6or2k"]
+[gd_scene load_steps=54 format=3 uid="uid://be8yt32f6or2k"]
 
 [ext_resource type="Script" path="res://script/player.gd" id="1_mvgg3"]
 [ext_resource type="AudioStream" uid="uid://b72innil1rqd1" path="res://assets/sounds/Player/voice_attack1.wav" id="2_1ngny"]
@@ -42,7 +42,25 @@ height = 62.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jgfp7"]
 height = 46.0
 
+[sub_resource type="Animation" id="Animation_jjmm6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("whip/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_eymm0")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6sfxa"]
+_data = {
+"RESET": SubResource("Animation_jjmm6")
+}
 
 [sub_resource type="Animation" id="Animation_ogp6f"]
 resource_name = "RESET"
@@ -478,7 +496,7 @@ script = ExtResource("1_mvgg3")
 sfx_attack_voice = [ExtResource("2_1ngny"), ExtResource("3_0uj6y")]
 
 [node name="Trevor" type="Sprite2D" parent="."]
-texture = ExtResource("2_tqcgh")
+texture = ExtResource("15_h54ev")
 
 [node name="collisionStand" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
@@ -507,7 +525,6 @@ texture = ExtResource("9_eymm0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="whip"]
 position = Vector2(57.5, -10)
 shape = SubResource("RectangleShape2D_kx2mi")
-disabled = true
 
 [node name="hurtbox" type="Area2D" parent="."]
 collision_mask = 9
