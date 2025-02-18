@@ -9,7 +9,6 @@ signal health_changed
 @onready var collisionCrouch: CollisionShape2D = $collisionCrouch
 @onready var area_collisionStand: CollisionShape2D = $hurtbox/AreaCollisionStand
 @onready var area_collisionCrouch: CollisionShape2D = $hurtbox/AreaCollisionCrouch
-@onready var remote_transform: RemoteTransform2D = $remote
 @onready var whip = $whip
 @onready var sfx_jump: AudioStreamPlayer = $Sounds/sfx_jump
 @onready var bg_music: AudioStreamPlayer = $"../Musica/bg_music"

@@ -7,7 +7,6 @@ var direction := -1
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var wall_detec: RayCast2D = $wall_detec
 @onready var floor_detec: RayCast2D = $floor_detec
-@onready var collision_2: CollisionShape2D = $hitbox/collision2
 @onready var sfx_death: AudioStreamPlayer = $Sound/sfx_death
 @onready var timer: Timer = $Timer
 
